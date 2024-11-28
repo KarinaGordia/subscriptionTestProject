@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:subscription_test/resources/resources.dart';
 import 'package:subscription_test/ui/subscription_screen/subscription_screen.dart';
+import 'package:subscription_test/ui/theme/theme.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,10 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.main,
       home: const InitialScreen(),
     );
   }
@@ -26,39 +23,6 @@ class InitialScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displaySmall = GoogleFonts.montserratAlternates(
-      textStyle: TextStyle(
-        color: Colors.white,
-        fontSize: 20,
-        height: 24 / 20,
-        fontWeight: FontWeight.w500,
-      ),
-    );
-    final bodyLarge = GoogleFonts.montserratAlternates(
-      textStyle: TextStyle(
-        color: Colors.white,
-        fontSize: 16,
-        height: 19.5 / 16,
-        fontWeight: FontWeight.w500,
-      ),
-    );
-    final bodyMedium = GoogleFonts.montserratAlternates(
-      textStyle: TextStyle(
-        color: Colors.white,
-        fontSize: 15,
-        height: 18 / 15,
-        fontWeight: FontWeight.w500,
-      ),
-    );
-    final labelMedium = GoogleFonts.montserratAlternates(
-      textStyle: TextStyle(
-        color: Colors.white,
-        fontSize: 12,
-        height: 15 / 12,
-        fontWeight: FontWeight.w500,
-      ),
-    );
-
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -72,20 +36,14 @@ class InitialScreen extends StatelessWidget {
           children: [
             Text(
               'Выберите подписку',
-              style: GoogleFonts.montserratAlternates(
-                textStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  height: 24 / 20,
-                  fontWeight: FontWeight.w500,
-                  shadows: [
-                    Shadow(
-                      offset: Offset(0, 4),
-                      blurRadius: 12.0,
-                      color: Color.fromRGBO(255, 255, 255, 0.4),
-                    ),
-                  ],
-                ),
+              style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                shadows: [
+                  const Shadow(
+                    offset: Offset(0, 4),
+                    blurRadius: 12.0,
+                    color: AppColors.white40,
+                  ),
+                ],
               ),
             ),
             const _SubscriptionOptionsSection(),
@@ -102,29 +60,25 @@ class _AdditionalInfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = GoogleFonts.montserratAlternates(
-      textStyle: const TextStyle(
-        color: Color.fromRGBO(255, 255, 255, 0.46),
-        fontSize: 12,
-        height: 15 / 12,
-        fontWeight: FontWeight.w500,
-      ),
-    );
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const _AdditionalInfoTextButton(text: 'terms of use',),
+        const _AdditionalInfoTextButton(text: 'terms of use'),
         const _AdditionalInfoTextButton(text: 'policy privacy'),
         FilledButton(
           onPressed: () {},
           style: const ButtonStyle(
             backgroundColor:
-                WidgetStatePropertyAll(Color.fromRGBO(107, 102, 216, 0.1)),
-            padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 10, horizontal: 16)),
+                WidgetStatePropertyAll(AppColors.slateBlue10),
+            padding: WidgetStatePropertyAll(
+                EdgeInsets.symmetric(vertical: 10, horizontal: 16)),
           ),
           child: Text(
             'Restore purchase',
-            style: textStyle,
+            style: Theme.of(context)
+                .textTheme
+                .labelMedium
+                ?.copyWith(color: AppColors.white46),
           ),
         ),
       ],
@@ -147,14 +101,10 @@ class _AdditionalInfoTextButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: GoogleFonts.montserratAlternates(
-          textStyle: const TextStyle(
-            color: Color.fromRGBO(255, 255, 255, 0.46),
-            fontSize: 12,
-            height: 15 / 12,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        style: Theme.of(context)
+            .textTheme
+            .labelMedium
+            ?.copyWith(color: AppColors.white46),
       ),
     );
   }
@@ -165,45 +115,14 @@ class _SubscriptionOptionsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displaySmall = GoogleFonts.montserratAlternates(
-      textStyle: TextStyle(
-        color: Colors.white,
-        fontSize: 20,
-        height: 24 / 20,
-        fontWeight: FontWeight.w500,
-      ),
-    );
-    final bodyLarge = GoogleFonts.montserratAlternates(
-      textStyle: TextStyle(
-        color: Colors.white,
-        fontSize: 16,
-        height: 19.5 / 16,
-        fontWeight: FontWeight.w500,
-      ),
-    );
-    final bodyMedium = GoogleFonts.montserratAlternates(
-      textStyle: TextStyle(
-        color: Colors.white,
-        fontSize: 15,
-        height: 18 / 15,
-        fontWeight: FontWeight.w500,
-      ),
-    );
-    final labelMedium = GoogleFonts.montserratAlternates(
-      textStyle: TextStyle(
-        color: Colors.white,
-        fontSize: 12,
-        height: 15 / 12,
-        fontWeight: FontWeight.w500,
-      ),
-    );
+    final textTheme = Theme.of(context).textTheme;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
           height: 131,
           decoration: BoxDecoration(
-            color: const Color.fromRGBO(255, 255, 255, 0.1),
+            color: Colors.white10,
             borderRadius: BorderRadius.circular(29),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -221,7 +140,7 @@ class _SubscriptionOptionsSection extends StatelessWidget {
                     border: Border.all(width: 1, color: Colors.white),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 Expanded(
@@ -232,36 +151,37 @@ class _SubscriptionOptionsSection extends StatelessWidget {
                     children: [
                       Text(
                         '1 месяц',
-                        style: bodyMedium,
+                        style: textTheme.bodyMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Text(
                         'Описание',
-                        style: labelMedium,
+                        style: textTheme.labelMedium,
                       ),
                     ],
                   ),
                 ),
                 Text(
                   '1000р',
-                  style: bodyLarge,
+                  style: textTheme.bodyLarge,
                 )
               ],
             ),
           ),
         ),
-        const SizedBox(height: 25,),
+        const SizedBox(
+          height: 25,
+        ),
         Container(
           height: 272,
           decoration: BoxDecoration(
-            color: const Color.fromRGBO(0, 0, 0, 0.37),
+            color: AppColors.black37,
             borderRadius: BorderRadius.circular(29),
             border: const GradientBoxBorder(
               gradient: LinearGradient(colors: [
-                Color.fromRGBO(255, 255, 255, 0),
-                Color.fromRGBO(255, 255, 255, 1),
+                AppColors.white0, Colors.white,
               ]),
               width: 1,
             ),
@@ -285,25 +205,25 @@ class _SubscriptionOptionsSection extends StatelessWidget {
                         border: Border.all(width: 1, color: Colors.white),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
+                        // mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
                             '6 месяцев',
-                            style: bodyMedium,
+                            style: textTheme.bodyMedium,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(
                             'Описание',
-                            style: labelMedium,
+                            style: textTheme.labelMedium,
                           ),
                         ],
                       ),
@@ -315,21 +235,15 @@ class _SubscriptionOptionsSection extends StatelessWidget {
                       children: [
                         Text(
                           '10 000р',
-                          style: bodyLarge,
+                          style: textTheme.bodyLarge,
                         ),
                         Text(
                           '12 000р',
-                          style: GoogleFonts.montserratAlternates(
-                            textStyle: TextStyle(
-                              color: Color.fromRGBO(255, 255, 255, 0.46),
-                              fontSize: 12,
-                              height: 15 / 12,
-                              fontWeight: FontWeight.w500,
-                              decoration: TextDecoration.lineThrough,
-                              decorationThickness: 2,
-                              decorationColor:
-                                  Color.fromRGBO(255, 255, 255, 0.46),
-                            ),
+                          style: textTheme.labelMedium?.copyWith(
+                            color: AppColors.white46,
+                            decoration: TextDecoration.lineThrough,
+                            decorationThickness: 2,
+                            decorationColor: AppColors.white46,
                           ),
                         ),
                       ],
@@ -343,8 +257,10 @@ class _SubscriptionOptionsSection extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 21,),
-        _GradientButton(displaySmall: displaySmall),
+        const SizedBox(
+          height: 21,
+        ),
+        const _GradientButton(),
       ],
     );
   }
@@ -353,10 +269,7 @@ class _SubscriptionOptionsSection extends StatelessWidget {
 class _GradientButton extends StatelessWidget {
   const _GradientButton({
     super.key,
-    required this.displaySmall,
   });
-
-  final TextStyle displaySmall;
 
   @override
   Widget build(BuildContext context) {
@@ -365,8 +278,8 @@ class _GradientButton extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(29.0)),
         gradient: LinearGradient(
           colors: [
-            Color.fromRGBO(107, 102, 216, 1),
-            Color.fromRGBO(186, 186, 215, 1),
+            AppColors.slateBlue,
+            AppColors.lavenderGray,
           ],
         ),
         // borderRadius: BorderRadius.all(Radius.circular(80.0)),
@@ -388,7 +301,7 @@ class _GradientButton extends StatelessWidget {
         onPressed: () {},
         child: Text(
           'Купить',
-          style: displaySmall,
+          style: Theme.of(context).textTheme.displaySmall,
         ),
       ),
     );
@@ -402,10 +315,14 @@ class _ContentSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: List.generate(length, (int index) {
-        return const _ContentLineItem();
-      }),
+    return Padding(
+      padding: const EdgeInsets.only(left: 10.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: List.generate(length, (int index) {
+          return const _ContentLineItem();
+        }),
+      ),
     );
   }
 }
@@ -418,7 +335,7 @@ class _ContentLineItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 14.0),
+      padding: const EdgeInsets.only(top: 14.0),
       child: Row(
         children: [
           Container(
@@ -434,14 +351,7 @@ class _ContentLineItem extends StatelessWidget {
           ),
           Text(
             'что входит',
-            style: GoogleFonts.montserratAlternates(
-              textStyle: const TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-                height: 15 / 12,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            style: Theme.of(context).textTheme.labelMedium,
           ),
         ],
       ),
