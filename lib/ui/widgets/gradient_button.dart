@@ -3,11 +3,13 @@ import 'package:subscription_test/ui/theme/theme.dart';
 
 class GradientButton extends StatelessWidget {
   const GradientButton({
-    super.key, required this.text, required this.onPressed,
+    super.key, required this.text, required this.onPressed, this.size,
   });
 
   final String text;
   final void Function()? onPressed;
+  final WidgetStateProperty<Size?>? size;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,18 +23,16 @@ class GradientButton extends StatelessWidget {
         ),
       ),
       child: FilledButton(
-        style: const ButtonStyle(
-          shape: WidgetStatePropertyAll(
+        style: ButtonStyle(
+          shape: const WidgetStatePropertyAll(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(29.0),
               ),
             ),
           ),
-          minimumSize: WidgetStatePropertyAll(
-            Size(double.infinity, 60),
-          ),
-          backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+          minimumSize: size,
+          backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
         ),
         onPressed: onPressed,
         child: Text(

@@ -20,7 +20,6 @@ class SubscriptionsSection extends StatelessWidget {
         ),
         GradientButton(
           text: 'Купить',
-          size: const WidgetStatePropertyAll(Size(double.infinity, 60)),
           onPressed: () {},
         ),
       ],
@@ -82,43 +81,43 @@ class _SubscriptionOption extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final selectionCircle = selected
         ? Container(
-            height: 28,
-            width: 28,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                  colors: [AppColors.slateBlue, AppColors.lavenderGray]),
-            ),
-            child: SvgPicture.asset(
-              'assets/images/checkMark.svg',
-              fit: BoxFit.none,
-            ),
-          )
+      height: 28,
+      width: 28,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: LinearGradient(
+            colors: [AppColors.slateBlue, AppColors.lavenderGray]),
+      ),
+      child: SvgPicture.asset(
+        'assets/images/checkMark.svg',
+        fit: BoxFit.none,
+      ),
+    )
         : Container(
-            height: 28,
-            width: 28,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(width: 1, color: Colors.white),
-            ),
-          );
+      height: 28,
+      width: 28,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(width: 1, color: Colors.white),
+      ),
+    );
 
     final selectedDecoration = selected
         ? BoxDecoration(
-            color: AppColors.black37,
-            borderRadius: BorderRadius.circular(29),
-            border: const GradientBoxBorder(
-              gradient: LinearGradient(colors: [
-                AppColors.white0,
-                Colors.white,
-              ]),
-              width: 1,
-            ),
-          )
+      color: AppColors.black37,
+      borderRadius: BorderRadius.circular(29),
+      border: const GradientBoxBorder(
+        gradient: LinearGradient(colors: [
+          AppColors.white0,
+          Colors.white,
+        ]),
+        width: 1,
+      ),
+    )
         : BoxDecoration(
-            color: Colors.white10,
-            borderRadius: BorderRadius.circular(29),
-          );
+      color: Colors.white10,
+      borderRadius: BorderRadius.circular(29),
+    );
 
     return Stack(
       alignment: Alignment.topRight,
@@ -211,10 +210,10 @@ class _SubscriptionOption extends StatelessWidget {
               ),
               child: Center(
                   child: Text(
-                'выгодно',
-                style:
+                    'выгодно',
+                    style:
                     textTheme.labelMedium?.copyWith(color: AppColors.slateBlue),
-              )),
+                  )),
             ),
           ),
       ],
