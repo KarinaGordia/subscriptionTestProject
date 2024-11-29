@@ -1,0 +1,8 @@
+class SubscriptionInfo {
+  final String duration;
+  final int price;
+  final int? oldPrice;
+  final String description;
+
+  SubscriptionInfo({required this.duration, required this.price, this.oldPrice, required this.description});
+}
