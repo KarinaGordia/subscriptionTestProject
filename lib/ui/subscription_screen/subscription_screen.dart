@@ -280,71 +280,90 @@ class _SubscriptionOption extends StatelessWidget {
             ),
           );
 
-    return InkWell(
-      onTap: () => onSelected?.call(!selected),
-      borderRadius: BorderRadius.circular(29),
-      child: Container(
-        height: 131,
-        decoration: BoxDecoration(
-          color: Colors.white10,
-          borderRadius: BorderRadius.circular(29),
+    return Stack(
+      alignment: Alignment.topRight,
+      clipBehavior: Clip.none,
+      children: [
+        if(info.profitableMark)
+          Positioned(
+          top: -15,
+          right: -11,
+          child: Container(
+            width: 75,
+            height: 35,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(13),
+            ),
+            child: Center(child: Text('выгодно', style: textTheme.labelMedium?.copyWith(color: AppColors.slateBlue),)),
+          ),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        child: Align(
-          alignment: Alignment.topLeft,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              selectionCircle,
-              const SizedBox(
-                width: 15,
-              ),
-              Expanded(
-                child: Column(
+        InkWell(
+        onTap: () => onSelected?.call(!selected),
+        borderRadius: BorderRadius.circular(29),
+        child: Container(
+          height: 131,
+          decoration: BoxDecoration(
+            color: Colors.white10,
+            borderRadius: BorderRadius.circular(29),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                selectionCircle,
+                const SizedBox(
+                  width: 15,
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        info.duration,
+                        style: textTheme.bodyMedium,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        info.description,
+                        style: textTheme.labelMedium,
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      info.duration,
-                      style: textTheme.bodyMedium,
+                      info.price,
+                      style: textTheme.bodyLarge,
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      info.description,
-                      style: textTheme.labelMedium,
-                    ),
+                    if (info.oldPrice != null)
+                      Text(
+                        info.oldPrice!,
+                        style: textTheme.labelMedium?.copyWith(
+                          color: AppColors.white46,
+                          decoration: TextDecoration.lineThrough,
+                          decorationThickness: 2,
+                          decorationColor: AppColors.white46,
+                        ),
+                      ),
                   ],
                 ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    info.price,
-                    style: textTheme.bodyLarge,
-                  ),
-                  if (info.oldPrice != null)
-                    Text(
-                      info.oldPrice!,
-                      style: textTheme.labelMedium?.copyWith(
-                        color: AppColors.white46,
-                        decoration: TextDecoration.lineThrough,
-                        decorationThickness: 2,
-                        decorationColor: AppColors.white46,
-                      ),
-                    ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
+      ),],
     );
   }
 }

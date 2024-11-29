@@ -4,7 +4,7 @@ import 'package:subscription_test/entity/entity.dart';
 class SubscriptionScreenModel extends ChangeNotifier{
   final List<SubscriptionInfo> _subscriptionInfo = [
     SubscriptionInfo(duration: '1 месяц', price: '1000р', description: 'Описание'),
-    SubscriptionInfo(duration: '6 месяцев', price: '10 000р',oldPrice: '12 000р', description: 'Описание'),
+    SubscriptionInfo(duration: '6 месяцев', price: '10 000р',oldPrice: '12 000р', description: 'Описание', profitableMark: true),
   ];
 
   List<SubscriptionInfo> get subscriptionInfo => _subscriptionInfo;
