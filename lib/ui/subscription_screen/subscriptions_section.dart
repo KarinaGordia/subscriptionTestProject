@@ -41,7 +41,7 @@ class _SubscriptionWidgetListState extends State<_SubscriptionWidgetList> {
 
   @override
   Widget build(BuildContext context) {
-    final model = SubscriptionScreenModelProvider.watch(context)?.model;
+    final model = SubscriptionScreenModelProvider.read(context)?.model;
     final subscriptions = model?.subscriptionInfo;
 
     if (subscriptions == null || subscriptions.isEmpty) {
