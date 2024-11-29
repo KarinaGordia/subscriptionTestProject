@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gradient_borders/gradient_borders.dart';
 import 'package:subscription_test/entity/entity.dart';
 import 'package:subscription_test/resources/resources.dart';
 import 'package:subscription_test/ui/subscription_screen/subscription_screen_model.dart';
@@ -132,111 +133,14 @@ class _SubscriptionsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _SubscriptionWidgetList(),
-        // _SubscriptionOption(
-        //   duration: '1 месяц',
-        //   price: '1000р',
-        //   selected: false,
-        // ),
-        // const SizedBox(
-        //   height: 25,
-        // ),
-        // _SubscriptionOption(
-        //   duration: '6 месяцев',
-        //   price: '10 000р',
-        //   oldPrice: '12 000р',
-        //   selected: false,
-        // ),
-        // Container(
-        //   height: 272,
-        //   decoration: BoxDecoration(
-        //     color: AppColors.black37,
-        //     borderRadius: BorderRadius.circular(29),
-        //     border: const GradientBoxBorder(
-        //       gradient: LinearGradient(colors: [
-        //         AppColors.white0, Colors.white,
-        //       ]),
-        //       width: 1,
-        //     ),
-        //   ),
-        //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        //   child: Column(
-        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //     crossAxisAlignment: CrossAxisAlignment.start,
-        //     children: [
-        //       Align(
-        //         alignment: Alignment.topLeft,
-        //         child: Row(
-        //           mainAxisAlignment: MainAxisAlignment.start,
-        //           crossAxisAlignment: CrossAxisAlignment.center,
-        //           children: [
-        //             Container(
-        //               height: 28,
-        //               width: 28,
-        //               decoration: BoxDecoration(
-        //                 shape: BoxShape.circle,
-        //                 border: Border.all(width: 1, color: Colors.white),
-        //               ),
-        //             ),
-        //             const SizedBox(
-        //               width: 15,
-        //             ),
-        //             Expanded(
-        //               child: Column(
-        //                 mainAxisAlignment: MainAxisAlignment.center,
-        //                 crossAxisAlignment: CrossAxisAlignment.start,
-        //                 // mainAxisSize: MainAxisSize.min,
-        //                 children: [
-        //                   Text(
-        //                     '6 месяцев',
-        //                     style: textTheme.bodyMedium,
-        //                   ),
-        //                   const SizedBox(
-        //                     height: 10,
-        //                   ),
-        //                   Text(
-        //                     'Описание',
-        //                     style: textTheme.labelMedium,
-        //                   ),
-        //                 ],
-        //               ),
-        //             ),
-        //             Column(
-        //               mainAxisAlignment: MainAxisAlignment.center,
-        //               crossAxisAlignment: CrossAxisAlignment.center,
-        //               mainAxisSize: MainAxisSize.min,
-        //               children: [
-        //                 Text(
-        //                   '10 000р',
-        //                   style: textTheme.bodyLarge,
-        //                 ),
-        //                 Text(
-        //                   '12 000р',
-        //                   style: textTheme.labelMedium?.copyWith(
-        //                     color: AppColors.white46,
-        //                     decoration: TextDecoration.lineThrough,
-        //                     decorationThickness: 2,
-        //                     decorationColor: AppColors.white46,
-        //                   ),
-        //                 ),
-        //               ],
-        //             ),
-        //           ],
-        //         ),
-        //       ),
-        //       const _ContentSection(
-        //         length: 5,
-        //       ),
-        //     ],
-        //   ),
-        // ),
-        const SizedBox(
+        SizedBox(
           height: 21,
         ),
-        const _GradientButton(),
+        _GradientButton(),
       ],
     );
   }
@@ -280,90 +184,121 @@ class _SubscriptionOption extends StatelessWidget {
             ),
           );
 
+    final selectedDecoration = selected
+        ? BoxDecoration(
+            color: AppColors.black37,
+            borderRadius: BorderRadius.circular(29),
+            border: const GradientBoxBorder(
+              gradient: LinearGradient(colors: [
+                AppColors.white0,
+                Colors.white,
+              ]),
+              width: 1,
+            ),
+          )
+        : BoxDecoration(
+            color: Colors.white10,
+            borderRadius: BorderRadius.circular(29),
+          );
+
     return Stack(
       alignment: Alignment.topRight,
       clipBehavior: Clip.none,
       children: [
-        if(info.profitableMark)
-          Positioned(
-          top: -15,
-          right: -11,
-          child: Container(
-            width: 75,
-            height: 35,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(13),
-            ),
-            child: Center(child: Text('выгодно', style: textTheme.labelMedium?.copyWith(color: AppColors.slateBlue),)),
-          ),
-        ),
         InkWell(
-        onTap: () => onSelected?.call(!selected),
-        borderRadius: BorderRadius.circular(29),
-        child: Container(
-          height: 131,
-          decoration: BoxDecoration(
-            color: Colors.white10,
-            borderRadius: BorderRadius.circular(29),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+          onTap: () => onSelected?.call(!selected),
+          borderRadius: BorderRadius.circular(29),
+          child: Container(
+            // duration: const Duration(milliseconds: 500),
+            height: selected ? 272 : 131,
+            decoration: selectedDecoration,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                selectionCircle,
-                const SizedBox(
-                  width: 15,
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        info.duration,
-                        style: textTheme.bodyMedium,
-                      ),
+                      selectionCircle,
                       const SizedBox(
-                        height: 10,
+                        width: 15,
                       ),
-                      Text(
-                        info.description,
-                        style: textTheme.labelMedium,
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              info.duration,
+                              style: textTheme.bodyMedium,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              info.description,
+                              style: textTheme.labelMedium,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            info.price,
+                            style: textTheme.bodyLarge,
+                          ),
+                          if (info.oldPrice != null)
+                            Text(
+                              info.oldPrice!,
+                              style: textTheme.labelMedium?.copyWith(
+                                color: AppColors.white46,
+                                decoration: TextDecoration.lineThrough,
+                                decorationThickness: 2,
+                                decorationColor: AppColors.white46,
+                              ),
+                            ),
+                        ],
                       ),
                     ],
                   ),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      info.price,
-                      style: textTheme.bodyLarge,
-                    ),
-                    if (info.oldPrice != null)
-                      Text(
-                        info.oldPrice!,
-                        style: textTheme.labelMedium?.copyWith(
-                          color: AppColors.white46,
-                          decoration: TextDecoration.lineThrough,
-                          decorationThickness: 2,
-                          decorationColor: AppColors.white46,
-                        ),
-                      ),
-                  ],
+                if(selected)
+                  const _ContentSection(
+                  length: 5,
                 ),
               ],
             ),
           ),
         ),
-      ),],
+        if (info.profitableMark)
+          Positioned(
+            top: -15,
+            right: -11,
+            child: Container(
+              width: 75,
+              height: 35,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(13),
+              ),
+              child: Center(
+                  child: Text(
+                    'выгодно',
+                    style:
+                    textTheme.labelMedium?.copyWith(color: AppColors.slateBlue),
+                  )),
+            ),
+          ),
+      ],
     );
   }
 }
