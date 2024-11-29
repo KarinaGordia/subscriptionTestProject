@@ -24,21 +24,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class InitialScreen extends StatefulWidget {
+class InitialScreen extends StatelessWidget {
   const InitialScreen({super.key});
-
-  @override
-  State<InitialScreen> createState() => _InitialScreenState();
-}
-
-class _InitialScreenState extends State<InitialScreen> {
-  final _model = SubscriptionScreenModel();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      // extendBodyBehindAppBar: true,
       // appBar: AppBar(
       //   backgroundColor: Colors.transparent,
       // ),
@@ -47,7 +39,7 @@ class _InitialScreenState extends State<InitialScreen> {
           const Positioned(
             top: 80,
             left: -199,
-            child: const BlurCircle(
+            child: BlurCircle(
               width: 317,
               height: 359,
             ),
@@ -55,7 +47,7 @@ class _InitialScreenState extends State<InitialScreen> {
           const Positioned(
             top: 370,
             left: 221,
-            child: const BlurCircle(
+            child: BlurCircle(
               width: 414,
               height: 359,
             ),
@@ -72,28 +64,6 @@ class _InitialScreenState extends State<InitialScreen> {
     );
   }
 }
-
-// SubscriptionScreenModelProvider(
-//   model: _model,
-//   child: const SubscriptionScreen(),
-// ),
-
-// Positioned(
-//   top: 370,
-//   left: 221,
-//   child: const BlurCircle(
-//     width: 414,
-//     height: 359,
-//   ),
-// ),
-// Positioned(
-//   top: 80,
-//   left: -199,
-//   child: const BlurCircle(
-//     width: 317,
-//     height: 359,
-//   ),
-// ),
 
 class BlurCircle extends StatelessWidget {
   const BlurCircle({super.key, required this.width, required this.height});
